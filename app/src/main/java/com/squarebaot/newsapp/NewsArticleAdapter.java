@@ -1,6 +1,5 @@
 package com.squarebaot.newsapp;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,14 +28,16 @@ public class NewsArticleAdapter extends RecyclerView.Adapter<NewsArticleAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.article, parent, false);
+        View view = layoutInflater.inflate(R.layout.news_recycler_list_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         Article article = articles.get(position);
-        Picasso.get().load(article.getUrlToImage()).into(viewHolder.articleImageView);
+        Picasso.get().load(article.getUrlToImage()).
+                resize(200, 200).centerCrop()
+                .into(viewHolder.articleImageView);
         viewHolder.sourceTextView.setText(article.getSource().getName());
         viewHolder.titleTextView.setText(article.getTitle());
     }
