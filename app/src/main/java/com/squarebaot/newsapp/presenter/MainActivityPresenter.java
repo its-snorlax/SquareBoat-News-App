@@ -32,7 +32,10 @@ public class MainActivityPresenter {
                 if (response.isSuccessful()) {
                     List<Article> articles = response.body().getArticles();
                     if (articles.isEmpty()) newsDashboardView.onArticleListIsEmpty();
-                    else newsDashboardView.articlesFetchSuccessful(articles);
+                    else {
+                        newsDashboardView.onArticleListIsNotEmpty();
+                        newsDashboardView.articlesFetchSuccessful(articles);
+                    }
                     return;
                 }
                 newsDashboardView.articlesFetchFail();

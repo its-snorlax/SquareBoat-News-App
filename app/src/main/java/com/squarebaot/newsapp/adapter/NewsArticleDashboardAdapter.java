@@ -14,13 +14,14 @@ import com.squarebaot.newsapp.model.Article;
 import com.squarebaot.newsapp.view.NewsDashboardView;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NewsArticleDashboardAdapter extends RecyclerView.Adapter<NewsArticleDashboardAdapter.ViewHolder> {
-    private final List<Article> articles;
+    private List<Article> articles;
     private NewsDashboardView newsDashboardView;
 
     public NewsArticleDashboardAdapter(List<Article> articles, NewsDashboardView newsDashboardView) {
@@ -50,6 +51,11 @@ public class NewsArticleDashboardAdapter extends RecyclerView.Adapter<NewsArticl
     @Override
     public int getItemCount() {
         return articles == null ? 0 : articles.size();
+    }
+
+    public void updateDataSet(List<Article> filteredList) {
+        articles = filteredList;
+        notifyDataSetChanged();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

@@ -2,7 +2,10 @@ package com.squarebaot.newsapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -11,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squarebaot.newsapp.ArticleSearchTextWatcher;
 import com.squarebaot.newsapp.R;
 import com.squarebaot.newsapp.adapter.NewsArticleDashboardAdapter;
 import com.squarebaot.newsapp.model.Article;
@@ -39,8 +43,12 @@ public class NewsDashboardActivity extends AppCompatActivity implements NewsDash
     @BindView(R.id.no_result)
     ConstraintLayout emptyResultLayout;
 
+    @BindView(R.id.search)
+    EditText searchEditText;
+
     MainActivityPresenter mainActivityPresenter;
     private List<Article> articles;
+    private NewsArticleDashboardAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +63,11 @@ public class NewsDashboardActivity extends AppCompatActivity implements NewsDash
 
     @Override
     public void articlesFetchSuccessful(List<Article> articles) {
-        emptyResultLayout.setVisibility(GONE);
-        recyclerView.setVisibility(VISIBLE);
         this.articles = articles;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        NewsArticleDashboardAdapter adapter = new NewsArticleDashboardAdapter(articles, this);
+        adapter = new NewsArticleDashboardAdapter(articles, this);
         recyclerView.setAdapter(adapter);
+        searchEditText.addTextChangedListener(new ArticleSearchTextWatcher(articles, adapter,this));
     }
 
     @Override
@@ -89,6 +96,12 @@ public class NewsDashboardActivity extends AppCompatActivity implements NewsDash
     public void onArticleListIsEmpty() {
         emptyResultLayout.setVisibility(VISIBLE);
         recyclerView.setVisibility(GONE);
+    }
+
+    @Override
+    public void onArticleListIsNotEmpty() {
+        emptyResultLayout.setVisibility(GONE);
+        recyclerView.setVisibility(VISIBLE);
     }
 
 }

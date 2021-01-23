@@ -18,4 +18,6 @@ public interface NewsDashboardView {
     void onArticleSelect(View listItemView);
 
     void onArticleListIsEmpty();
+
+    void onArticleListIsNotEmpty();
 }
