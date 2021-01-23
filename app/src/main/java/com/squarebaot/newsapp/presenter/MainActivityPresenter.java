@@ -3,7 +3,7 @@ package com.squarebaot.newsapp.presenter;
 import com.squarebaot.newsapp.model.Article;
 import com.squarebaot.newsapp.network.response.ApiResponse;
 import com.squarebaot.newsapp.network.services.FetchNewsArticle;
-import com.squarebaot.newsapp.view.MainActivityView;
+import com.squarebaot.newsapp.view.NewsDashboardView;
 
 import java.util.List;
 
@@ -15,33 +15,33 @@ import static com.squarebaot.newsapp.network.Constant.API_KEY;
 
 public class MainActivityPresenter {
     private final FetchNewsArticle fetchNewsArticle;
-    private final MainActivityView mainActivityView;
+    private final NewsDashboardView newsDashboardView;
 
-    public MainActivityPresenter(FetchNewsArticle fetchNewsArticle, MainActivityView mainActivityView) {
+    public MainActivityPresenter(FetchNewsArticle fetchNewsArticle, NewsDashboardView newsDashboardView) {
         this.fetchNewsArticle = fetchNewsArticle;
-        this.mainActivityView = mainActivityView;
+        this.newsDashboardView = newsDashboardView;
     }
 
 
     public void fetchTopHeadlines() {
-        mainActivityView.showProgressBar();
+        newsDashboardView.showProgressBar();
         fetchNewsArticle.fetchTopHeadlines("IN", API_KEY).enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
-                mainActivityView.hideProgressBar();
+                newsDashboardView.hideProgressBar();
                 if (response.isSuccessful()) {
                     List<Article> articles = response.body().getArticles();
-                    if (articles.isEmpty()) mainActivityView.onArticleListIsEmpty();
-                    else mainActivityView.articlesFetchSuccessful(articles);
+                    if (articles.isEmpty()) newsDashboardView.onArticleListIsEmpty();
+                    else newsDashboardView.articlesFetchSuccessful(articles);
                     return;
                 }
-                mainActivityView.articlesFetchFail();
+                newsDashboardView.articlesFetchFail();
             }
 
             @Override
             public void onFailure(Call<ApiResponse> call, Throwable t) {
-                mainActivityView.hideProgressBar();
-                mainActivityView.articlesFetchFail();
+                newsDashboardView.hideProgressBar();
+                newsDashboardView.articlesFetchFail();
             }
         });
     }

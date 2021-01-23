@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squarebaot.newsapp.R;
 import com.squarebaot.newsapp.model.Article;
-import com.squarebaot.newsapp.view.MainActivityView;
+import com.squarebaot.newsapp.view.NewsDashboardView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,11 +21,11 @@ import butterknife.ButterKnife;
 
 public class NewsArticleDashboardAdapter extends RecyclerView.Adapter<NewsArticleDashboardAdapter.ViewHolder> {
     private final List<Article> articles;
-    private MainActivityView mainActivityView;
+    private NewsDashboardView newsDashboardView;
 
-    public NewsArticleDashboardAdapter(List<Article> articles, MainActivityView mainActivityView) {
+    public NewsArticleDashboardAdapter(List<Article> articles, NewsDashboardView newsDashboardView) {
         this.articles = articles;
-        this.mainActivityView = mainActivityView;
+        this.newsDashboardView = newsDashboardView;
     }
 
     @NonNull
@@ -33,7 +33,7 @@ public class NewsArticleDashboardAdapter extends RecyclerView.Adapter<NewsArticl
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.news_recycler_list_item, parent, false);
-        view.setOnClickListener((v) -> mainActivityView.onArticleSelect(v));
+        view.setOnClickListener((v) -> newsDashboardView.onArticleSelect(v));
         return new ViewHolder(view);
     }
 

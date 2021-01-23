@@ -6,7 +6,7 @@ import com.squarebaot.newsapp.model.Article;
 
 import java.util.List;
 
-public interface MainActivityView {
+public interface NewsDashboardView {
     void articlesFetchSuccessful(List<Article> article);
 
     void articlesFetchFail();

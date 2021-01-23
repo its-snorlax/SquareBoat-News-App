@@ -3,7 +3,6 @@ package com.squarebaot.newsapp.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -19,7 +18,7 @@ import com.squarebaot.newsapp.network.Constant;
 import com.squarebaot.newsapp.network.ServiceBuilder;
 import com.squarebaot.newsapp.network.services.FetchNewsArticle;
 import com.squarebaot.newsapp.presenter.MainActivityPresenter;
-import com.squarebaot.newsapp.view.MainActivityView;
+import com.squarebaot.newsapp.view.NewsDashboardView;
 
 import java.util.List;
 
@@ -29,7 +28,7 @@ import butterknife.ButterKnife;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class NewsDashboardActivity extends AppCompatActivity implements MainActivityView {
+public class NewsDashboardActivity extends AppCompatActivity implements NewsDashboardView {
 
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
