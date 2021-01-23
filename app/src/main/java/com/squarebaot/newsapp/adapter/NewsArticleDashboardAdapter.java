@@ -34,7 +34,7 @@ public class NewsArticleDashboardAdapter extends RecyclerView.Adapter<NewsArticl
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.news_recycler_list_item, parent, false);
-        view.setOnClickListener((v) -> newsDashboardView.onArticleSelect(v));
+        view.setOnClickListener((v) -> newsDashboardView.onArticleSelect(v, articles));
         return new ViewHolder(view);
     }
 

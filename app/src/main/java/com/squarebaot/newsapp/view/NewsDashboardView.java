@@ -15,7 +15,7 @@ public interface NewsDashboardView {
 
     void hideProgressBar();
 
-    void onArticleSelect(View listItemView);
+    void onArticleSelect(View listItemView, List<Article> articles);
 
     void onArticleListIsEmpty();
 

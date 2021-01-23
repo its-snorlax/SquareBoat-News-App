@@ -2,8 +2,6 @@ package com.squarebaot.newsapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -67,7 +65,7 @@ public class NewsDashboardActivity extends AppCompatActivity implements NewsDash
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NewsArticleDashboardAdapter(articles, this);
         recyclerView.setAdapter(adapter);
-        searchEditText.addTextChangedListener(new ArticleSearchTextWatcher(articles, adapter,this));
+        searchEditText.addTextChangedListener(new ArticleSearchTextWatcher(articles, adapter, this));
     }
 
     @Override
@@ -86,7 +84,7 @@ public class NewsDashboardActivity extends AppCompatActivity implements NewsDash
     }
 
     @Override
-    public void onArticleSelect(View listItemView) {
+    public void onArticleSelect(View listItemView, List<Article> articles) {
         Intent intent = new Intent(this, ArticleBrowseActivity.class);
         intent.putExtra(Constant.ARTICLE, articles.get(recyclerView.getChildLayoutPosition(listItemView)));
         startActivity(intent);
