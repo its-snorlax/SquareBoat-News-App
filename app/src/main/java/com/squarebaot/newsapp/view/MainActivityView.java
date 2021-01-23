@@ -1,5 +1,7 @@
 package com.squarebaot.newsapp.view;
 
+import android.view.View;
+
 import com.squarebaot.newsapp.model.Article;
 
 import java.util.List;
@@ -12,4 +14,6 @@ public interface MainActivityView {
     void showProgressBar();
 
     void hideProgressBar();
+
+    void onArticleSelect(View listItemView);
 }

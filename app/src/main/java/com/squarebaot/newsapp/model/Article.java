@@ -1,6 +1,8 @@
 package com.squarebaot.newsapp.model;
 
-public class Article {
+import java.io.Serializable;
+
+public class Article implements Serializable {
     private Source source;
     private String author;
     private String title;

@@ -1,17 +1,19 @@
 package com.squarebaot.newsapp.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.squarebaot.newsapp.adapter.NewsArticleDashboardAdapter;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.squarebaot.newsapp.R;
+import com.squarebaot.newsapp.adapter.NewsArticleDashboardAdapter;
 import com.squarebaot.newsapp.model.Article;
+import com.squarebaot.newsapp.network.Constant;
 import com.squarebaot.newsapp.network.ServiceBuilder;
 import com.squarebaot.newsapp.network.services.FetchNewsArticle;
 import com.squarebaot.newsapp.presenter.MainActivityPresenter;
@@ -31,6 +33,7 @@ public class NewsDashboardActivity extends AppCompatActivity implements MainActi
     ProgressBar progressBar;
 
     MainActivityPresenter mainActivityPresenter;
+    private List<Article> articles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +48,10 @@ public class NewsDashboardActivity extends AppCompatActivity implements MainActi
 
     @Override
     public void articlesFetchSuccessful(List<Article> articles) {
+        this.articles = articles;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new NewsArticleDashboardAdapter(articles));
+        NewsArticleDashboardAdapter adapter = new NewsArticleDashboardAdapter(articles, this);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -63,4 +68,12 @@ public class NewsDashboardActivity extends AppCompatActivity implements MainActi
     public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
     }
+
+    @Override
+    public void onArticleSelect(View listItemView) {
+        Intent intent = new Intent(this, ArticleBrowseActivity.class);
+        intent.putExtra(Constant.ARTICLE, articles.get(recyclerView.getChildLayoutPosition(listItemView)));
+        startActivity(intent);
+    }
+
 }

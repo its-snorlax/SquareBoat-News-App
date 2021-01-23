@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.squarebaot.newsapp.R;
 import com.squarebaot.newsapp.model.Article;
+import com.squarebaot.newsapp.view.MainActivityView;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,9 +21,11 @@ import butterknife.ButterKnife;
 
 public class NewsArticleDashboardAdapter extends RecyclerView.Adapter<NewsArticleDashboardAdapter.ViewHolder> {
     private final List<Article> articles;
+    private MainActivityView mainActivityView;
 
-    public NewsArticleDashboardAdapter(List<Article> articles) {
+    public NewsArticleDashboardAdapter(List<Article> articles, MainActivityView mainActivityView) {
         this.articles = articles;
+        this.mainActivityView = mainActivityView;
     }
 
     @NonNull
@@ -30,6 +33,7 @@ public class NewsArticleDashboardAdapter extends RecyclerView.Adapter<NewsArticl
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.news_recycler_list_item, parent, false);
+        view.setOnClickListener((v) -> mainActivityView.onArticleSelect(v));
         return new ViewHolder(view);
     }
 
@@ -63,5 +67,6 @@ public class NewsArticleDashboardAdapter extends RecyclerView.Adapter<NewsArticl
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+
     }
 }
