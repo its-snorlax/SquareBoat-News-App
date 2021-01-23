@@ -8,4 +8,6 @@
     <dimen name="padding_5dp">5dp</dimen>
     <dimen name="padding_15dp">15dp</dimen>
     <dimen name="text_size_14_sp">14sp</dimen>
+    <dimen name="corner_radius_15dp">15dp</dimen>
+    <dimen name="text_size_16sp">16sp</dimen>
 </resources>

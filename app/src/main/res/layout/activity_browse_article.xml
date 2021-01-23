@@ -63,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_15dp"
-            android:textSize="@dimen/text_size_18sp" />
+            android:textSize="@dimen/text_size_16sp" />
 
         <TextView
             android:id="@+id/read_full_story"
@@ -72,7 +72,7 @@
             android:layout_marginHorizontal="@dimen/margin_15dp"
             android:text="@string/see_full_story"
             android:textColor="@color/colorPrimary"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_16sp"
             android:textStyle="bold"
             app:drawableEndCompat="@drawable/ic_baseline_arrow_forward"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -15,6 +15,7 @@
         android:layout_marginTop="@dimen/margin_15dp"
         android:background="@drawable/round_corners"
         android:drawableRight="@drawable/ic_search_24"
+        android:singleLine="true"
         android:hint="@string/search"
         android:padding="@dimen/padding_15dp"
         android:textSize="@dimen/text_size_18sp"
