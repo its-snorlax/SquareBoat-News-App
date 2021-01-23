@@ -1,4 +1,4 @@
-package com.squarebaot.newsapp;
+package com.squarebaot.newsapp.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squarebaot.newsapp.R;
 import com.squarebaot.newsapp.model.Article;
 import com.squareup.picasso.Picasso;
 
@@ -17,10 +18,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class NewsArticleAdapter extends RecyclerView.Adapter<NewsArticleAdapter.ViewHolder> {
+public class NewsArticleDashboardAdapter extends RecyclerView.Adapter<NewsArticleDashboardAdapter.ViewHolder> {
     private final List<Article> articles;
 
-    public NewsArticleAdapter(List<Article> articles) {
+    public NewsArticleDashboardAdapter(List<Article> articles) {
         this.articles = articles;
     }
 

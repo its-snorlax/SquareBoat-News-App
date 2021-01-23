@@ -1,9 +1,8 @@
-package com.squarebaot.presenter;
+package com.squarebaot.newsapp.presenter;
 
-import com.squarebaot.newsapp.network.Constant;
 import com.squarebaot.newsapp.network.response.ApiResponse;
 import com.squarebaot.newsapp.network.services.FetchNewsArticle;
-import com.squarebaot.view.MainActivityView;
+import com.squarebaot.newsapp.view.MainActivityView;
 
 import retrofit2.Call;
 import retrofit2.Callback;

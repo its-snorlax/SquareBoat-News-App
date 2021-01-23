@@ -1,4 +1,4 @@
-package com.squarebaot.view;
+package com.squarebaot.newsapp.view;
 
 import com.squarebaot.newsapp.model.Article;
 

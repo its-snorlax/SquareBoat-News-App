@@ -1,4 +1,4 @@
-package com.squarebaot.newsapp;
+package com.squarebaot.newsapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,18 +9,20 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.squarebaot.newsapp.adapter.NewsArticleDashboardAdapter;
+import com.squarebaot.newsapp.R;
 import com.squarebaot.newsapp.model.Article;
 import com.squarebaot.newsapp.network.ServiceBuilder;
 import com.squarebaot.newsapp.network.services.FetchNewsArticle;
-import com.squarebaot.presenter.MainActivityPresenter;
-import com.squarebaot.view.MainActivityView;
+import com.squarebaot.newsapp.presenter.MainActivityPresenter;
+import com.squarebaot.newsapp.view.MainActivityView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainActivityView {
+public class NewsDashboardActivity extends AppCompatActivity implements MainActivityView {
 
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_news_dashboard);
         ButterKnife.bind(this);
 
         mainActivityPresenter = new MainActivityPresenter(
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityView 
     @Override
     public void articlesFetchSuccessful(List<Article> articles) {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new NewsArticleAdapter(articles));
+        recyclerView.setAdapter(new NewsArticleDashboardAdapter(articles));
     }
 
     @Override
