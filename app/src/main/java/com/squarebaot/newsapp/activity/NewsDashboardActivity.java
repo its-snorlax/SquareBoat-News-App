@@ -3,10 +3,12 @@ package com.squarebaot.newsapp.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +26,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class NewsDashboardActivity extends AppCompatActivity implements MainActivityView {
 
     @BindView(R.id.recyclerview)
@@ -31,6 +36,9 @@ public class NewsDashboardActivity extends AppCompatActivity implements MainActi
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
+
+    @BindView(R.id.no_result)
+    ConstraintLayout emptyResultLayout;
 
     MainActivityPresenter mainActivityPresenter;
     private List<Article> articles;
@@ -48,6 +56,8 @@ public class NewsDashboardActivity extends AppCompatActivity implements MainActi
 
     @Override
     public void articlesFetchSuccessful(List<Article> articles) {
+        emptyResultLayout.setVisibility(GONE);
+        recyclerView.setVisibility(VISIBLE);
         this.articles = articles;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         NewsArticleDashboardAdapter adapter = new NewsArticleDashboardAdapter(articles, this);
@@ -61,12 +71,12 @@ public class NewsDashboardActivity extends AppCompatActivity implements MainActi
 
     @Override
     public void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(VISIBLE);
     }
 
     @Override
     public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(GONE);
     }
 
     @Override
@@ -74,6 +84,12 @@ public class NewsDashboardActivity extends AppCompatActivity implements MainActi
         Intent intent = new Intent(this, ArticleBrowseActivity.class);
         intent.putExtra(Constant.ARTICLE, articles.get(recyclerView.getChildLayoutPosition(listItemView)));
         startActivity(intent);
+    }
+
+    @Override
+    public void onArticleListIsEmpty() {
+        emptyResultLayout.setVisibility(VISIBLE);
+        recyclerView.setVisibility(GONE);
     }
 
 }

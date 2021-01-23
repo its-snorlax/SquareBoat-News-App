@@ -16,4 +16,6 @@ public interface MainActivityView {
     void hideProgressBar();
 
     void onArticleSelect(View listItemView);
+
+    void onArticleListIsEmpty();
 }

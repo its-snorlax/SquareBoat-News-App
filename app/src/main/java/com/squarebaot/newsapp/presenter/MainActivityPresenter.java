@@ -1,8 +1,11 @@
 package com.squarebaot.newsapp.presenter;
 
+import com.squarebaot.newsapp.model.Article;
 import com.squarebaot.newsapp.network.response.ApiResponse;
 import com.squarebaot.newsapp.network.services.FetchNewsArticle;
 import com.squarebaot.newsapp.view.MainActivityView;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +30,9 @@ public class MainActivityPresenter {
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 mainActivityView.hideProgressBar();
                 if (response.isSuccessful()) {
-                    mainActivityView.articlesFetchSuccessful(response.body().getArticles());
+                    List<Article> articles = response.body().getArticles();
+                    if (articles.isEmpty()) mainActivityView.onArticleListIsEmpty();
+                    else mainActivityView.articlesFetchSuccessful(articles);
                     return;
                 }
                 mainActivityView.articlesFetchFail();
