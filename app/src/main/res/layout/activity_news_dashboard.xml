@@ -11,18 +11,23 @@
         android:id="@+id/search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/margin_15dp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerview"
+        android:layout_marginHorizontal="@dimen/margin_10dp"
+        android:layout_marginTop="@dimen/margin_15dp"
+        android:background="@drawable/round_corners"
+        android:drawableRight="@drawable/ic_search_24"
+        android:hint="@string/search"
+        android:padding="@dimen/padding_15dp"
+        android:textSize="@dimen/text_size_18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/white"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="@dimen/margin_10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search" />

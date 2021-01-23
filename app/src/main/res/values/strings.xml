@@ -2,4 +2,5 @@
     <string name="app_name">NewsApp</string>
     <string name="see_full_story">See full story</string>
     <string name="no_result_found">No Result Found!</string>
+    <string name="search">Search...</string>
 </resources>
