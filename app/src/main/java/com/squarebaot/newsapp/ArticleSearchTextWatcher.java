@@ -38,8 +38,8 @@ public class ArticleSearchTextWatcher implements TextWatcher {
         if (searchKeyword.isEmpty()) adapter.updateDataSet(articles);
         List<Article> filteredList = new ArrayList<>();
         for (Article article : this.articles) {
-            if (article.getTitle().contains(searchKeyword.toLowerCase()) ||
-                    article.getTitle().contains(searchKeyword.toUpperCase()))
+            if (article.getTitle().toLowerCase().contains(searchKeyword.toLowerCase()) ||
+                    article.getSource().getName().toLowerCase().contains(searchKeyword.toLowerCase()))
                 filteredList.add(article);
         }
 

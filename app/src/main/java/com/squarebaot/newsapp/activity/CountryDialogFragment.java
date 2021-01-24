@@ -48,7 +48,6 @@ public class CountryDialogFragment extends DialogFragment {
         String[] countries = getActivity().getResources().getStringArray(R.array.location);
         for (String country : countries) {
             RadioButton radioButton = new RadioButton(getContext());
-            radioButton.setCompoundDrawables(null, null, getActivity().getResources().getDrawable(android.R.drawable.btn_radio), null);
             radioButton.setText(country);
             countryRadioGroup.addView(radioButton);
         }
