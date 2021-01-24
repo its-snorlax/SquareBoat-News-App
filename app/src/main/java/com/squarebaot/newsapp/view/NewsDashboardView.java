@@ -21,5 +21,5 @@ public interface NewsDashboardView {
 
     void onArticleListIsNotEmpty();
 
-    void updatedSource();
+    void updateListBySources();
 }

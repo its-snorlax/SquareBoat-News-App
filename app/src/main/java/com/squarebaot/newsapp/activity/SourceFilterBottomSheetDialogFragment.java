@@ -65,7 +65,7 @@ public class SourceFilterBottomSheetDialogFragment extends BottomSheetDialogFrag
     @Override
     public void onDestroy() {
         super.onDestroy();
-        newsDashboardView.updatedSource();
+        newsDashboardView.updateListBySources();
     }
 
     @Override

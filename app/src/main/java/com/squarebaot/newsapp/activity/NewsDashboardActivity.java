@@ -107,8 +107,9 @@ public class NewsDashboardActivity extends BaseActivity implements NewsDashboard
     }
 
     @Override
-    public void updatedSource() {
+    public void updateListBySources() {
         if (selectedSources.isEmpty()) {
+            onArticleListIsNotEmpty();
             adapter.updateDataSet(this.articles);
             return;
         }
@@ -117,6 +118,11 @@ public class NewsDashboardActivity extends BaseActivity implements NewsDashboard
             if (selectedSources.contains(article.getSource().getName()))
                 filteredBySource.add(article);
         }
+        if (filteredBySource.isEmpty()) {
+            onArticleListIsEmpty();
+            return;
+        }
+        onArticleListIsNotEmpty();
         adapter.updateDataSet(filteredBySource);
     }
 
