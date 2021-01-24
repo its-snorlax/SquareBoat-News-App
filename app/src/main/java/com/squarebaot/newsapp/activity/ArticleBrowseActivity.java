@@ -31,7 +31,7 @@ import static com.squarebaot.newsapp.R.id.title;
 import static com.squarebaot.newsapp.network.Constant.DESIRED_STRING_FORMAT;
 import static com.squarebaot.newsapp.network.Constant.ORIGINAL_STRING_FORMAT;
 
-public class ArticleBrowseActivity extends AppCompatActivity {
+public class ArticleBrowseActivity extends BaseActivity {
 
     @BindView(source)
     TextView sourceTextView;

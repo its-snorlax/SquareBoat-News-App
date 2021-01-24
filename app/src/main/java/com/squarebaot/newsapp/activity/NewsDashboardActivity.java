@@ -34,7 +34,7 @@ import static android.view.View.VISIBLE;
 import static com.squarebaot.newsapp.R.id.source_filter;
 import static com.squarebaot.newsapp.SourceFilter.selectedSources;
 
-public class NewsDashboardActivity extends AppCompatActivity implements NewsDashboardView {
+public class NewsDashboardActivity extends BaseActivity implements NewsDashboardView {
 
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
