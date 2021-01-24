@@ -9,9 +9,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.squarebaot.newsapp.ArticleSearchTextWatcher;
 import com.squarebaot.newsapp.R;
 import com.squarebaot.newsapp.adapter.NewsArticleDashboardAdapter;
@@ -26,9 +29,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.squarebaot.newsapp.R.id.source_filter;
 
 public class NewsDashboardActivity extends AppCompatActivity implements NewsDashboardView {
 
@@ -102,4 +107,9 @@ public class NewsDashboardActivity extends AppCompatActivity implements NewsDash
         recyclerView.setVisibility(VISIBLE);
     }
 
+    @OnClick(source_filter)
+    public void onSourceFilterButtonClick() {
+        SourceFilterBottomSheetDialogFragment sourcesDialog = new SourceFilterBottomSheetDialogFragment();
+        sourcesDialog.show(getSupportFragmentManager(), "sourceFragment");
+    }
 }

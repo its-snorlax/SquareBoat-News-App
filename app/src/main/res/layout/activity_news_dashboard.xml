@@ -75,6 +75,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/source_filter"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginRight="@dimen/margin_15dp"
