@@ -30,21 +30,25 @@ import butterknife.OnClick;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.squarebaot.newsapp.R.id.no_result;
+import static com.squarebaot.newsapp.R.id.progress_bar;
+import static com.squarebaot.newsapp.R.id.recyclerview;
+import static com.squarebaot.newsapp.R.id.search;
 import static com.squarebaot.newsapp.R.id.source_filter;
 import static com.squarebaot.newsapp.SourceFilter.selectedSources;
 
 public class NewsDashboardActivity extends BaseActivity implements NewsDashboardView {
 
-    @BindView(R.id.recyclerview)
+    @BindView(recyclerview)
     RecyclerView recyclerView;
 
-    @BindView(R.id.progress_bar)
+    @BindView(progress_bar)
     ProgressBar progressBar;
 
-    @BindView(R.id.no_result)
+    @BindView(no_result)
     ConstraintLayout emptyResultLayout;
 
-    @BindView(R.id.search)
+    @BindView(search)
     EditText searchEditText;
 
     MainActivityPresenter mainActivityPresenter;

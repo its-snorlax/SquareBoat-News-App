@@ -32,7 +32,7 @@ public class SourceFilterBottomSheetDialogFragment extends BottomSheetDialogFrag
 
     @BindView(source_list)
     RecyclerView sourceRecyclerView;
-    private SourceListAdapter sourceListAdapter;
+
     private NewsDashboardView newsDashboardView;
 
     public SourceFilterBottomSheetDialogFragment(NewsDashboardView newsDashboardView) {
@@ -57,7 +57,7 @@ public class SourceFilterBottomSheetDialogFragment extends BottomSheetDialogFrag
 
     @Override
     public void onSourceFetchSuccessful(List<Source> sources) {
-        sourceListAdapter = new SourceListAdapter(sources);
+        SourceListAdapter sourceListAdapter = new SourceListAdapter(sources);
         sourceRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         sourceRecyclerView.setAdapter(sourceListAdapter);
     }
