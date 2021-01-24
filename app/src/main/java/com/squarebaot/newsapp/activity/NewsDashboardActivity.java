@@ -2,11 +2,15 @@ package com.squarebaot.newsapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,7 +41,7 @@ import static com.squarebaot.newsapp.R.id.search;
 import static com.squarebaot.newsapp.R.id.source_filter;
 import static com.squarebaot.newsapp.SourceFilter.selectedSources;
 
-public class NewsDashboardActivity extends BaseActivity implements NewsDashboardView {
+public class NewsDashboardActivity extends BaseActivity implements NewsDashboardView, AdapterView.OnItemSelectedListener {
 
     @BindView(recyclerview)
     RecyclerView recyclerView;
@@ -61,9 +65,25 @@ public class NewsDashboardActivity extends BaseActivity implements NewsDashboard
         setContentView(R.layout.activity_news_dashboard);
         ButterKnife.bind(this);
 
+        fetchTopHeadlinesFor("IN");
+    }
+
+    private void fetchTopHeadlinesFor(String countryISOCode) {
         mainActivityPresenter = new MainActivityPresenter(
                 ServiceBuilder.build(FetchNewsArticle.class), this);
-        mainActivityPresenter.fetchTopHeadlines();
+        mainActivityPresenter.fetchTopHeadlines(countryISOCode);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.dashboard_activity_menu, menu);
+
+        AppCompatSpinner spinner = (AppCompatSpinner) menu.findItem(R.id.location_spinner).getActionView();
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.location, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setOnItemSelectedListener(this);
+        return true;
     }
 
     @Override
@@ -133,5 +153,17 @@ public class NewsDashboardActivity extends BaseActivity implements NewsDashboard
     public void onSourceFilterButtonClick() {
         SourceFilterBottomSheetDialogFragment sourcesDialog = new SourceFilterBottomSheetDialogFragment(this);
         sourcesDialog.show(getSupportFragmentManager(), "sourceFragment");
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String[] locations = getResources().getStringArray(R.array.location);
+        String selectedLocation = locations[position];
+        fetchTopHeadlinesFor(selectedLocation);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

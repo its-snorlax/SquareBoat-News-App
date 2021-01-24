@@ -23,9 +23,9 @@ public class MainActivityPresenter {
     }
 
 
-    public void fetchTopHeadlines() {
+    public void fetchTopHeadlines(String countryISOCode) {
         newsDashboardView.showProgressBar();
-        fetchNewsArticle.fetchTopHeadlines("IN", API_KEY).enqueue(new Callback<ApiResponse>() {
+        fetchNewsArticle.fetchTopHeadlines(countryISOCode, API_KEY).enqueue(new Callback<ApiResponse>() {
             @Override
             public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
                 newsDashboardView.hideProgressBar();

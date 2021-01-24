@@ -4,4 +4,5 @@
     <string name="no_result_found">No Result Found!</string>
     <string name="search">Search...</string>
     <string name="source_filters">Source Filters</string>
+    <string name="location">Location</string>
 </resources>
