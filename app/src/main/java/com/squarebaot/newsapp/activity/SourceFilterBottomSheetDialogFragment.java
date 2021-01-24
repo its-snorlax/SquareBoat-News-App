@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,7 +25,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.squarebaot.newsapp.R.id.progress_bar;
 import static com.squarebaot.newsapp.R.id.source_list;
 
 public class SourceFilterBottomSheetDialogFragment extends BottomSheetDialogFragment implements SourceListView {

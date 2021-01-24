@@ -1,6 +1,5 @@
 package com.squarebaot.newsapp.presenter;
 
-import com.squarebaot.newsapp.network.Constant;
 import com.squarebaot.newsapp.network.response.SourceResponse;
 import com.squarebaot.newsapp.network.services.FetchArticleSource;
 import com.squarebaot.newsapp.view.SourceListView;

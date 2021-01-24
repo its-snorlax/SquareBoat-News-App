@@ -14,7 +14,6 @@ import com.squarebaot.newsapp.model.Article;
 import com.squarebaot.newsapp.view.NewsDashboardView;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
