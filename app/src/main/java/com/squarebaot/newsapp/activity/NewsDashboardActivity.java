@@ -22,6 +22,7 @@ import com.squarebaot.newsapp.network.services.FetchNewsArticle;
 import com.squarebaot.newsapp.presenter.MainActivityPresenter;
 import com.squarebaot.newsapp.view.NewsDashboardView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,6 +32,7 @@ import butterknife.OnClick;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 import static com.squarebaot.newsapp.R.id.source_filter;
+import static com.squarebaot.newsapp.SourceFilter.selectedSources;
 
 public class NewsDashboardActivity extends AppCompatActivity implements NewsDashboardView {
 
@@ -104,9 +106,23 @@ public class NewsDashboardActivity extends AppCompatActivity implements NewsDash
         recyclerView.setVisibility(VISIBLE);
     }
 
+    @Override
+    public void updatedSource() {
+        if (selectedSources.isEmpty()) {
+            adapter.updateDataSet(this.articles);
+            return;
+        }
+        List<Article> filteredBySource = new ArrayList<>();
+        for (Article article : this.articles) {
+            if (selectedSources.contains(article.getSource().getName()))
+                filteredBySource.add(article);
+        }
+        adapter.updateDataSet(filteredBySource);
+    }
+
     @OnClick(source_filter)
     public void onSourceFilterButtonClick() {
-        SourceFilterBottomSheetDialogFragment sourcesDialog = new SourceFilterBottomSheetDialogFragment();
+        SourceFilterBottomSheetDialogFragment sourcesDialog = new SourceFilterBottomSheetDialogFragment(this);
         sourcesDialog.show(getSupportFragmentManager(), "sourceFragment");
     }
 }

@@ -18,6 +18,7 @@ import com.squarebaot.newsapp.network.ServiceBuilder;
 import com.squarebaot.newsapp.network.response.Source;
 import com.squarebaot.newsapp.network.services.FetchArticleSource;
 import com.squarebaot.newsapp.presenter.SourcePresenter;
+import com.squarebaot.newsapp.view.NewsDashboardView;
 import com.squarebaot.newsapp.view.SourceListView;
 
 import java.util.List;
@@ -31,6 +32,12 @@ public class SourceFilterBottomSheetDialogFragment extends BottomSheetDialogFrag
 
     @BindView(source_list)
     RecyclerView sourceRecyclerView;
+    private SourceListAdapter sourceListAdapter;
+    private NewsDashboardView newsDashboardView;
+
+    public SourceFilterBottomSheetDialogFragment(NewsDashboardView newsDashboardView) {
+        this.newsDashboardView = newsDashboardView;
+    }
 
     @Nullable
     @Override
@@ -50,9 +57,15 @@ public class SourceFilterBottomSheetDialogFragment extends BottomSheetDialogFrag
 
     @Override
     public void onSourceFetchSuccessful(List<Source> sources) {
-        SourceListAdapter sourceListAdapter = new SourceListAdapter(sources);
+        sourceListAdapter = new SourceListAdapter(sources);
         sourceRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         sourceRecyclerView.setAdapter(sourceListAdapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        newsDashboardView.updatedSource();
     }
 
     @Override

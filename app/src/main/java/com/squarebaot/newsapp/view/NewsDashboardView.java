@@ -20,4 +20,6 @@ public interface NewsDashboardView {
     void onArticleListIsEmpty();
 
     void onArticleListIsNotEmpty();
+
+    void updatedSource();
 }

@@ -17,9 +17,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.squarebaot.newsapp.R.id.source_name;
+import static com.squarebaot.newsapp.SourceFilter.selectedSources;
 
 public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.ViewHolder> {
-    private List<Source> sources;
+    private final List<Source> sources;
 
     public SourceListAdapter(List<Source> sources) {
         this.sources = sources;
@@ -36,6 +37,11 @@ public class SourceListAdapter extends RecyclerView.Adapter<SourceListAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Source currentSource = sources.get(position);
         holder.sourceNameCheckBox.setText(currentSource.getName());
+        holder.sourceNameCheckBox.setChecked(selectedSources.contains(currentSource.getName()));
+        holder.sourceNameCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) selectedSources.add(buttonView.getText().toString());
+            else selectedSources.remove(buttonView.getText().toString());
+        });
     }
 
     @Override
