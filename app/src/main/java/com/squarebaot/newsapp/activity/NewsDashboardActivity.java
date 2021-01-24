@@ -3,14 +3,13 @@ package com.squarebaot.newsapp.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.appcompat.widget.AppCompatSpinner;
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,6 +33,7 @@ import butterknife.OnClick;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.squarebaot.newsapp.R.id.location_menu_item;
 import static com.squarebaot.newsapp.R.id.no_result;
 import static com.squarebaot.newsapp.R.id.progress_bar;
 import static com.squarebaot.newsapp.R.id.recyclerview;
@@ -41,7 +41,7 @@ import static com.squarebaot.newsapp.R.id.search;
 import static com.squarebaot.newsapp.R.id.source_filter;
 import static com.squarebaot.newsapp.SourceFilter.selectedSources;
 
-public class NewsDashboardActivity extends BaseActivity implements NewsDashboardView, AdapterView.OnItemSelectedListener {
+public class NewsDashboardActivity extends BaseActivity implements NewsDashboardView {
 
     @BindView(recyclerview)
     RecyclerView recyclerView;
@@ -77,13 +77,19 @@ public class NewsDashboardActivity extends BaseActivity implements NewsDashboard
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.dashboard_activity_menu, menu);
-
-        AppCompatSpinner spinner = (AppCompatSpinner) menu.findItem(R.id.location_spinner).getActionView();
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.location, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case location_menu_item:
+                openCountryBottomSheetFragment();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 
     @Override
@@ -149,21 +155,20 @@ public class NewsDashboardActivity extends BaseActivity implements NewsDashboard
         adapter.updateDataSet(filteredBySource);
     }
 
+    @Override
+    public void onCountrySelect(String countryISOCode) {
+        fetchTopHeadlinesFor(countryISOCode);
+    }
+
     @OnClick(source_filter)
     public void onSourceFilterButtonClick() {
         SourceFilterBottomSheetDialogFragment sourcesDialog = new SourceFilterBottomSheetDialogFragment(this);
         sourcesDialog.show(getSupportFragmentManager(), "sourceFragment");
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String[] locations = getResources().getStringArray(R.array.location);
-        String selectedLocation = locations[position];
-        fetchTopHeadlinesFor(selectedLocation);
+    private void openCountryBottomSheetFragment() {
+        CountryDialogFragment countryDialog = new CountryDialogFragment(this);
+        countryDialog.show(getSupportFragmentManager(), "countryFragment");
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }

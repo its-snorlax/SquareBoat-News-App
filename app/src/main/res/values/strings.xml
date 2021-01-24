@@ -5,4 +5,7 @@
     <string name="search">Search...</string>
     <string name="source_filters">Source Filters</string>
     <string name="location">Location</string>
+    <string name="top_headlines">Top Headlines</string>
+    <string name="select_your_country">Select your country</string>
+    <string name="apply">Apply</string>
 </resources>

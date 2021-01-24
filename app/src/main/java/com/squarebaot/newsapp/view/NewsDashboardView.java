@@ -22,4 +22,6 @@ public interface NewsDashboardView {
     void onArticleListIsNotEmpty();
 
     void updateListBySources();
+
+    void onCountrySelect(String countryISOCode);
 }
